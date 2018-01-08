@@ -52,14 +52,12 @@ test <- full_data[892:1309,]
 
 train$Survived <- train_temp$Survived
 #rforest_model <- cforest(as.factor(Survived) ~ Pclass + Sex + Age + SibSp + Parch + Fare + Embarked, data = train, 
-#                     controls=cforest_unbiased(ntree=1000, mtry=3)) #
-#rforest_model <- cforest(as.factor(Survived) ~ Pclass + Sex + Age + SibSp + Parch + Fare + Embarked, data = train, 
 #                     controls=cforest_unbiased(ntree=1000)) #12  gave .78468 score
 #prediction <- predict(rforest_model, test, OOB=TRUE, type = "response")
 
 svm_mod <- svm(as.factor(Survived) ~ Pclass + Sex + Age + SibSp + Parch + Fare + Embarked, data = train) #14  gave .79904
 prediction <- predict(svm_mod, test)
 output<-data.frame(PassengerId = test$PassengerId, Survived= prediction)
-#out_f='C:/Users/Mahbub/Desktop/R_learning/Homeworks/project/performance_14.csv' 
+#out_f='C:/Users/Mahbub/Desktop/R_learning/Homeworks/project/prediction_1.csv' 
 write.csv(output, file= out_f, quote = F, row.names = F)
 
