@@ -1,23 +1,3 @@
-args = commandArgs(trailingOnly=TRUE)
-if (length(args)==0) {
-  stop("USAGE: Rscript hw5_studentID.R -out prediction.csv", call.=FALSE)
-}
-
-# parse parameters
-i<-1 
-while(i < length(args))
-{
-  if(args[i] == "-out"){
-    out_f<-args[i+1]
-    i<-i+1
-  }else{
-    stop(paste("Unknown flag", args[i]), call.=FALSE)
-  }
-  i<-i+1
-}
-print(paste("output file:", out_f))
-#print(paste("number of folds      :", n_fold))
-
 options(warn=-1)
 library(e1071)
 #library(randomForest)
@@ -58,6 +38,7 @@ train$Survived <- train_temp$Survived
 svm_mod <- svm(as.factor(Survived) ~ Pclass + Sex + Age + SibSp + Parch + Fare + Embarked, data = train) #14  gave .79904
 prediction <- predict(svm_mod, test)
 output<-data.frame(PassengerId = test$PassengerId, Survived= prediction)
-#out_f='C:/Users/Mahbub/Desktop/R_learning/Homeworks/project/prediction_1.csv' 
+#out_f='C:/Users/Mahbub/Desktop/R_learning/Homeworks/project/prediction_1.csv'
+out_f='prediction_1.csv'
 write.csv(output, file= out_f, quote = F, row.names = F)
 
